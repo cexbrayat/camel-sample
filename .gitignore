@@ -1,0 +1,4 @@
+target/
+.idea/
+camel-sample.iml
+**/credentials.properties
