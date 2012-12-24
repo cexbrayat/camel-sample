@@ -10,7 +10,7 @@ public class TwitterRoute extends RouteBuilder {
     private String accessToken;
     private String accessTokenSecret;
     private String searchTerm = "bieber";
-    private int delay = 10;
+    private int delay = 2;
 
     @java.lang.Override
     public void configure() {
@@ -23,6 +23,7 @@ public class TwitterRoute extends RouteBuilder {
 
         // poll twitter search for new tweets
         fromF("twitter://search?type=polling&delay=%s&keywords=%s", delay, searchTerm)
+                .routeId("twitter")
                 .choice()
                 .when(body().contains("love"))
                 .to("direct:love")

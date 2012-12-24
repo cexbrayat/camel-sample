@@ -10,6 +10,7 @@ public class MongoRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("direct:mongo")
+                .routeId("mongo")
                 .enrich(MONGODB + "findOneByQuery", new MongoAggregationStrategy())
                 .to(MONGODB + "update");
     }
