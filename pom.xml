@@ -12,6 +12,9 @@
         <camel.version>2.10.3</camel.version>
         <slf4j.version>1.6.6</slf4j.version>
         <logback.version>1.0.6</logback.version>
+        <console.version>0.1-SNAPSHOT</console.version>
+        <fest-assert-core.version>2.0M8</fest-assert-core.version>
+        <spring.version>3.0.7.RELEASE</spring.version>
     </properties>
 
     <dependencies>
@@ -43,7 +46,30 @@
         <dependency>
             <groupId>com.ninja-squad</groupId>
             <artifactId>console-notifier</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>${console.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-spring</artifactId>
+            <version>${camel.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring-javaconfig</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-assert-core</artifactId>
+            <version>${fest-assert-core.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

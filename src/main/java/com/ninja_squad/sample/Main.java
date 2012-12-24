@@ -1,5 +1,7 @@
 package com.ninja_squad.sample;
 
+import com.mongodb.Mongo;
+
 import java.io.FileInputStream;
 import java.util.Properties;
 
@@ -14,14 +16,25 @@ public class Main {
 
         main.enableHangupSupport();
 
-        // twitter route
-        TwitterRoute route = new TwitterRoute();
-        route.setAccessToken(properties.getProperty("accessToken"));
-        route.setAccessTokenSecret(properties.getProperty("accessTokenSecret"));
-        route.setConsumerKey(properties.getProperty("consumerKey"));
-        route.setConsumerSecret(properties.getProperty("consumerSecret"));
+        // console
 
-        main.addRouteBuilder(route);
+        // twitter route
+        TwitterRoute twitter = new TwitterRoute();
+        twitter.setAccessToken(properties.getProperty("accessToken"));
+        twitter.setAccessTokenSecret(properties.getProperty("accessTokenSecret"));
+        twitter.setConsumerKey(properties.getProperty("consumerKey"));
+        twitter.setConsumerSecret(properties.getProperty("consumerSecret"));
+
+        main.addRouteBuilder(twitter);
+
+        // mongo route
+        main.bind("db", new Mongo());
+        MongoRoute mongo = new MongoRoute();
+        main.addRouteBuilder(mongo);
+
+        // trend route
+        TrendRoute trend = new TrendRoute();
+        main.addRouteBuilder(trend);
 
         main.run();
     }

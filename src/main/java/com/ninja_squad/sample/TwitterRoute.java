@@ -23,8 +23,14 @@ public class TwitterRoute extends RouteBuilder {
 
         // poll twitter search for new tweets
         fromF("twitter://search?type=polling&delay=%s&keywords=%s", delay, searchTerm)
-                //.to("mongodb:sample?database=flights&collection=tickets&operation=insert");
-                .to("log:twitter");
+                .choice()
+                .when(body().contains("love"))
+                .to("direct:love")
+                .when(body().contains("hate"))
+                .to("direct:hate")
+                .otherwise()
+                .multicast().to("direct:neutral", "direct:ninja")
+                .end();
     }
 
 
