@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <bean id="lifecycle" class="com.ninja_squad.console.notifier.ConsoleLifecycleStrategy"/>
+    <bean id="notifier" class="com.ninja_squad.console.notifier.ConsoleEventNotifier"/>
+    <bean id="tracer" class="com.ninja_squad.console.notifier.ConsoleTracer">
+        <constructor-arg index="0" ref="notifier"/>
+    </bean>
+    <bean id="db" class="com.mongodb.Mongo"/>
+
+    <camel:camelContext>
+        <camel:propertyPlaceholder id="properties" location="classpath:credentials.properties"/>
+        <camel:package>com.ninja_squad.sample</camel:package>
+    </camel:camelContext>
+
+</beans>
