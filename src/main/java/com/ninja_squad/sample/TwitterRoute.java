@@ -2,17 +2,13 @@ package com.ninja_squad.sample;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.twitter.TwitterComponent;
-import org.apache.camel.main.Main;
-
-import java.io.FileInputStream;
-import java.util.Properties;
 
 public class TwitterRoute extends RouteBuilder {
 
-    private static String consumerKey;
-    private static String consumerSecret;
-    private static String accessToken;
-    private static String accessTokenSecret;
+    private String consumerKey;
+    private String consumerSecret;
+    private String accessToken;
+    private String accessTokenSecret;
     private String searchTerm = "bieber";
     private int delay = 10;
 
@@ -31,25 +27,22 @@ public class TwitterRoute extends RouteBuilder {
                 .to("log:twitter");
     }
 
-    public static void main(String[] args) throws Exception {
-        // loading properties
-        Properties properties = new Properties();
-        properties.load(new FileInputStream("src/main/resources/credentials.properties"));
-        accessToken = properties.getProperty("accessToken");
-        accessTokenSecret = properties.getProperty("accessTokenSecret");
-        consumerKey = properties.getProperty("consumerKey");
-        consumerSecret = properties.getProperty("consumerSecret");
 
-        // launching camel
-        Main main = new Main();
-
-        main.enableHangupSupport();
-
-        TwitterRoute route = new TwitterRoute();
-
-        main.addRouteBuilder(route);
-
-        main.run();
+    public void setConsumerKey(String consumerKey) {
+        this.consumerKey = consumerKey;
     }
+
+    public void setConsumerSecret(String consumerSecret) {
+        this.consumerSecret = consumerSecret;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public void setAccessTokenSecret(String accessTokenSecret) {
+        this.accessTokenSecret = accessTokenSecret;
+    }
+
 
 }
