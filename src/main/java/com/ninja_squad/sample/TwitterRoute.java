@@ -10,7 +10,7 @@ public class TwitterRoute extends RouteBuilder {
     private String accessToken;
     private String accessTokenSecret;
     private String searchTerm = "bieber";
-    private int delay = 2;
+    private int delay = 1;
 
     @java.lang.Override
     public void configure() {
